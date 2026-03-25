@@ -316,7 +316,7 @@ export default function Header() {
           </nav>
 
           {/* CTA desktop */}
-          <a href="#contact" className="btn-yellow contact-btn-desktop" style={{ padding: '10px 22px', borderRadius: 4, fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.1em', textDecoration: 'none' }}>
+          <a href="/contact" className="btn-yellow contact-btn-desktop" style={{ padding: '10px 22px', borderRadius: 4, fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.1em', textDecoration: 'none' }}>
             CONTACT
           </a>
 
