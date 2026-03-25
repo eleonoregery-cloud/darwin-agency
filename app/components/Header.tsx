@@ -184,7 +184,7 @@ const besoinsTabs: Tab[] = [
 ]
 
 const navItems = [
-  { label: "L'AGENCE", href: '#' },
+  { label: "L'AGENCE", href: '/agence' },
   { label: 'EXPERTISES', href: '#', tabs: expertisesTabs },
   { label: 'CAS CLIENTS', href: '#' },
   { label: 'VOS BESOINS', href: '#', tabs: besoinsTabs },
