@@ -198,6 +198,8 @@ export default function Header() {
   const [openMenu, setOpenMenu] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<number>(0)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [mobileExpanded, setMobileExpanded] = useState<string | null>(null)
+  const [mobileSubTab, setMobileSubTab] = useState<number>(0)
   const lastScrollY = useRef(0)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -347,35 +349,120 @@ export default function Header() {
           background: '#fff', zIndex: 198, overflowY: 'auto',
           borderTop: '1px solid #eee',
         }}>
-          <div style={{ padding: '16px 24px 40px' }}>
-            {navItems.map((item) => (
+          <div style={{ padding: '8px 0 40px' }}>
+            {navItems.map((item) => {
+              const isExpanded = mobileExpanded === item.label
+              const expandedTabs = item.tabs ?? []
+              return (
+                <div key={item.label} style={{ borderBottom: '1px solid #f0f0f0' }}>
+                  {/* Row principal */}
+                  {item.tabs ? (
+                    <button
+                      onClick={() => {
+                        setMobileExpanded(isExpanded ? null : item.label)
+                        setMobileSubTab(0)
+                      }}
+                      style={{
+                        width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                        padding: '18px 24px', border: 'none', background: isExpanded ? '#fafafa' : 'transparent',
+                        color: '#0a0a0a', fontSize: '0.9rem', fontWeight: 700, letterSpacing: '0.08em',
+                        cursor: 'pointer', textAlign: 'left',
+                      }}
+                    >
+                      {item.label}
+                      <span style={{
+                        fontSize: '0.8rem', color: '#999',
+                        transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.2s', display: 'inline-block',
+                      }}>›</span>
+                    </button>
+                  ) : (
+                    <a
+                      href={item.href}
+                      onClick={() => setMobileOpen(false)}
+                      style={{
+                        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                        padding: '18px 24px', textDecoration: 'none', color: '#0a0a0a',
+                        fontSize: '0.9rem', fontWeight: 700, letterSpacing: '0.08em',
+                      }}
+                    >
+                      {item.label}
+                      <span style={{ color: '#ccc', fontSize: '1rem' }}>›</span>
+                    </a>
+                  )}
+
+                  {/* Sous-menu accordéon */}
+                  {item.tabs && isExpanded && (
+                    <div style={{ background: '#fafafa', borderTop: '1px solid #f0f0f0' }}>
+                      {/* Tabs selector */}
+                      <div style={{ overflowX: 'auto', display: 'flex', gap: 0, borderBottom: '1px solid #ebebeb' }}>
+                        {expandedTabs.map((tab, i) => (
+                          <button
+                            key={tab.label}
+                            onClick={() => setMobileSubTab(i)}
+                            style={{
+                              flexShrink: 0, padding: '10px 16px',
+                              border: 'none', borderBottom: mobileSubTab === i ? '2px solid #29C5F5' : '2px solid transparent',
+                              background: 'transparent', color: mobileSubTab === i ? '#0a0a0a' : '#888',
+                              fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.06em',
+                              cursor: 'pointer', transition: 'color 0.15s',
+                            }}
+                          >
+                            {tab.label}
+                          </button>
+                        ))}
+                      </div>
+                      {/* Items */}
+                      <div style={{ padding: '8px 0' }}>
+                        {expandedTabs[mobileSubTab]?.items.map((subItem) => (
+                          <a
+                            key={subItem.label}
+                            href="#"
+                            onClick={() => setMobileOpen(false)}
+                            style={{
+                              display: 'flex', flexDirection: 'column', padding: '12px 24px',
+                              textDecoration: 'none', borderBottom: '1px solid #f5f5f5',
+                            }}
+                          >
+                            <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#0a0a0a' }}>{subItem.label}</span>
+                            <span style={{ fontSize: '0.72rem', color: '#888', marginTop: 2 }}>{subItem.desc}</span>
+                          </a>
+                        ))}
+                        {expandedTabs[mobileSubTab]?.cta && (
+                          <a
+                            href={expandedTabs[mobileSubTab].cta!.href}
+                            onClick={() => setMobileOpen(false)}
+                            style={{
+                              display: 'block', margin: '12px 24px',
+                              background: '#0a0a0a', color: '#FFF127',
+                              padding: '12px 16px', borderRadius: 4,
+                              fontWeight: 700, fontSize: '0.75rem',
+                              letterSpacing: '0.08em', textDecoration: 'none', textAlign: 'center',
+                            }}
+                          >
+                            {expandedTabs[mobileSubTab].cta!.label} →
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+            <div style={{ padding: '24px 24px 0' }}>
               <a
-                key={item.label}
-                href={item.href}
+                href="#contact"
                 onClick={() => setMobileOpen(false)}
                 style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                  padding: '18px 0', borderBottom: '1px solid #f0f0f0',
-                  textDecoration: 'none', color: '#0a0a0a',
-                  fontSize: '1rem', fontWeight: 700, letterSpacing: '0.08em',
+                  display: 'block', textAlign: 'center',
+                  background: '#FFF127', color: '#0a0a0a', padding: '16px 24px',
+                  borderRadius: 4, fontWeight: 700, fontSize: '0.82rem',
+                  letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none',
                 }}
               >
-                {item.label}
-                <span style={{ color: '#ccc', fontSize: '1.2rem' }}>›</span>
+                CONTACT →
               </a>
-            ))}
-            <a
-              href="#contact"
-              onClick={() => setMobileOpen(false)}
-              style={{
-                display: 'block', textAlign: 'center', marginTop: 28,
-                background: '#FFF127', color: '#0a0a0a', padding: '16px 24px',
-                borderRadius: 4, fontWeight: 700, fontSize: '0.82rem',
-                letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none',
-              }}
-            >
-              CONTACT →
-            </a>
+            </div>
           </div>
         </div>
       )}
