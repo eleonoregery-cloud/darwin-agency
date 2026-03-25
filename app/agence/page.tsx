@@ -97,6 +97,7 @@ const team = [
   { name: 'Carole Kabanda', role: 'Directrice Media', photo: '/images/team/carole-kabanda.jpg' },
   { name: 'Thomas Courjeault', role: 'Directeur SEO / SEA / SMA', photo: '/images/team/thomas-courjeault.jpg' },
   { name: 'Amaury Micha de Faletans', role: 'Directeur Stratégie & Innovation', photo: '/images/team/amaury-micha.jpg' },
+  { name: 'Julia Sanchez', role: 'Directrice de Hey Charly', photo: '/images/team/julia-sanchez.jpg' },
 ]
 
 const certifications = [
