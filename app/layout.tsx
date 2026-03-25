@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Anton, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 const anton = Anton({
   variable: "--font-anton",
@@ -28,7 +30,11 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${anton.variable} ${sourceSans.variable}`}>
       <body style={{ fontFamily: "var(--font-source-sans), sans-serif", margin: 0, padding: 0 }}>
-        {children}
+        <Header />
+        <main style={{ paddingTop: 68 }}>
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
