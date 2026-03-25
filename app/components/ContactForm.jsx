@@ -54,6 +54,7 @@ export default function ContactForm() {
   const [form, setForm] = useState({
     prenom: '',
     nom: '',
+    entreprise: '',
     email: '',
     telephone: '',
     budget: '',
@@ -143,7 +144,7 @@ export default function ContactForm() {
         </p>
         <button
           style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#0a0a0a', color: '#fff', padding: '12px 24px', borderRadius: 4, border: 'none', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.08em' }}
-          onClick={() => { setStatus('idle'); setForm({ prenom: '', nom: '', email: '', telephone: '', budget: '', message: '' }); setBesoins([]) }}
+          onClick={() => { setStatus('idle'); setForm({ prenom: '', nom: '', entreprise: '', email: '', telephone: '', budget: '', message: '' }); setBesoins([]) }}
         >
           Envoyer un autre message
         </button>
@@ -170,6 +171,14 @@ export default function ContactForm() {
             style={{ ...inputStyle, borderColor: errors.nom ? '#e53e3e' : '#e0e0e0' }} />
           {errors.nom && <p style={errorStyle}>{errors.nom}</p>}
         </div>
+      </div>
+
+      {/* Entreprise */}
+      <div style={{ marginBottom: 20 }}>
+        <label style={labelStyle}>Entreprise</label>
+        <input type="text" name="entreprise" value={form.entreprise} onChange={handleChange}
+          onFocus={handleFocus} onBlur={handleBlur} placeholder="Darwin Agency"
+          style={inputStyle} />
       </div>
 
       {/* Email + Téléphone */}
