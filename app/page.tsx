@@ -2,6 +2,7 @@ import Image from 'next/image'
 import PerformanceSlider from './components/PerformanceSlider'
 import ContactForm from './components/ContactForm'
 import HeroSection from './components/HeroSection'
+import BesoinsAccordion from './components/BesoinsAccordion'
 import { CAS_CLIENTS } from './data/cas-clients'
 
 const featuredCases = CAS_CLIENTS.slice(0, 6)
@@ -28,50 +29,40 @@ export default function Home() {
       {/* ─── NOUS SOMMES DARWIN ─── */}
       <section style={{ background: '#fff', padding: '60px 24px 80px', borderTop: '1px solid #eee' }}>
         <div className="rsp-2col" style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80 }}>
+
+          {/* ── Colonne gauche — présentation ── */}
           <div>
-            <h2 className="font-anton" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.6rem)', textTransform: 'uppercase', marginBottom: 24, lineHeight: 1.1 }}>
+            <h2 className="font-anton" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.6rem)', textTransform: 'uppercase', marginBottom: 32, lineHeight: 1.1 }}>
               NOUS SOMMES DARWIN
             </h2>
             <p style={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#444', marginBottom: 16 }}>
-              Agence digitale indépendante fondée en 2003, DARWIN réunit des experts en acquisition,
-              performance et création de contenu. Notre conviction : le digital doit être au service
-              de la stratégie de marque, pas l&apos;inverse.
+              Nous croyons en une approche de la performance digitale à la fois stratégique et créative.
+            </p>
+            <p style={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#444', marginBottom: 16 }}>
+              Forts de notre expertise de plus de 20 ans en acquisition et performance, nous vous accompagnons pour répondre à des objectifs mesurables qui maximisent l&apos;efficacité et le retour sur investissement (ROI), en atteignant précisément vos audiences.
+            </p>
+            <p style={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#444', marginBottom: 16 }}>
+              Chaque projet que nous menons est une recherche d&apos;excellence, avec un objectif clair : accompagner votre marque dans son évolution et lui permettre de rester agile face aux nouvelles attentes du marché et de ses publics.
             </p>
             <p style={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#444', marginBottom: 32 }}>
-              Nous accompagnons des marques ambitieuses dans leur transformation digitale avec une
-              approche hybride alliant stratégie, créativité et data.
+              Nous répondons à vos besoins pour :
             </p>
-            <a href="/a-propos-de-darwin" className="arrow-link btn-outline" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '12px 24px', borderRadius: 4, textDecoration: 'none', fontSize: '0.8rem', letterSpacing: '0.1em' }}>
-              DÉCOUVRIR DARWIN <span className="arrow">→</span>
+            <a href="/a-propos-de-darwin" style={{ display: 'inline-flex', alignItems: 'center', gap: 12, textDecoration: 'none', fontSize: '0.9rem', fontWeight: 700, color: '#0a0a0a' }}>
+              <span>→</span> Qui sommes-nous ?
             </a>
           </div>
 
+          {/* ── Colonne droite — besoins accordéon ── */}
           <div>
-            {[
-              { title: 'DÉVELOPPER VOTRE BRANDING', desc: "Nous déployons des campagnes de visibilité pour installer votre marque dans l'esprit de vos audiences.\nDisplay, vidéo et formats impactants sont activés pour maximiser la mémorisation et la répétition. La performance est pilotée via des indicateurs concrets : impressions, taux de complétion, durée de vue et taux de clic.", open: true },
-              { title: 'CONSTRUIRE UNE STRATÉGIE DE QUALITÉ', desc: "Définir les leviers d'acquisition les plus pertinents pour maximiser votre ROI à chaque étape du funnel." },
-              { title: 'DÉFINIR VOS OBJECTIFS LEAN', desc: "Travailler avec agilité et itérations courtes pour tester, apprendre et optimiser en continu." },
-              { title: 'ACTIVER LE DIGITAL DANS VOTRE STRATÉGIE', desc: "Placer le digital au cœur de votre stratégie globale pour des résultats mesurables et durables." },
-            ].map((item, i) => (
-              <details key={i} open={item.open} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                <summary style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '18px 0', cursor: 'pointer' }}>
-                  <span style={{ fontWeight: 700, fontSize: '0.82rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-                    {item.title}
-                  </span>
-                  <span style={{ fontSize: '1.4rem', fontWeight: 300, lineHeight: 1, flexShrink: 0, marginLeft: 12 }}>+</span>
-                </summary>
-                <p style={{ padding: '0 0 18px', fontSize: '0.9rem', lineHeight: 1.7, color: '#555', margin: 0, whiteSpace: 'pre-line' }}>
-                  {item.desc}
-                </p>
-              </details>
-            ))}
+            <BesoinsAccordion />
 
             <div style={{ marginTop: 32 }}>
-              <a href="#contact" className="btn-yellow arrow-link" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '14px 28px', borderRadius: 4, textDecoration: 'none', fontSize: '0.82rem', fontWeight: 700, letterSpacing: '0.1em' }}>
-                EN PARLER AVEC NOUS <span className="arrow">→</span>
+              <a href="/contact" className="btn-yellow" style={{ display: 'block', textAlign: 'center', padding: '18px 28px', textDecoration: 'none', fontSize: '0.82rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                ON PARLE DE VOS ENJEUX ?
               </a>
             </div>
           </div>
+
         </div>
       </section>
 
